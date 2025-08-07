@@ -4,14 +4,14 @@ require_relative 'player'
 class Game
   def initialize
     @board = Board.new
-    @player = create_players
+    @players = create_players
     @current_players_idx = 0
   end
 
   def play
     loop do
       @board.display
-      current_player = @player[@current_players_idx]
+      current_player = @players[@current_players_idx]
       puts "#{current_player.name}'s turn (#{current_player.symbol})"
       begin
       column = ask_column
