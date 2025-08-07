@@ -13,8 +13,8 @@ class Game
       @board.display
       current_player = @player[@current_players_idx]
       puts "#{current_player.name}'s turn (#{current_player.symbol})"
-      column = ask_column
       begin
+      column = ask_column
         @board.place_piece(column, current_player.symbol)
       rescue => e
         puts e.message

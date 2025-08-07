@@ -11,7 +11,7 @@ class Board
   def place_piece(column, symbol)
     raise 'Column out of bounds' if column < 0 || column >= COLUMNS
     row = lowest_empty_row(column)
-    raise 'Column if full' if row.nil?
+    raise 'Column is full' if row.nil?
     grid[row][column] = symbol
     row
   end
@@ -26,7 +26,7 @@ class Board
 
   def display
     puts grid.map { |row| row.map { |cell| cell || '.' }.join(' ') }
-    puts (0...COLUMNS).to_a.join('')
+    puts (0...COLUMNS).to_a.join(' ')
   end
 
   private
@@ -37,19 +37,19 @@ class Board
 
   def horizontal_win?(symbol)
     grid.any? do |row|
-      row.each_cons(4).any? { |group| group.all?(symbol) }  
+      row.each_cons(4).any? { |group| group.all? { |cell| cell == symbol } }  
     end
   end
 
   def vertical_win?(symbol)
     grid.transpose.any? do |col|
-      col.each_cons(4).any? { |group| group.all?(symbol) }
+      col.each_cons(4).any? { |group| group.all? { |cell| cell == symbol } }
     end
   end
 
   def diagonal_win?(symbol)
     diagonals.any? do |diag|
-      diag.each_cons(4).any? { |group| group.all?(symbol) }
+      diag.each_cons(4).any? { |group| group.all? { |cell| cell == symbol } }
     end
   end
 
@@ -62,7 +62,7 @@ class Board
     end
     (3..ROWS - 1).each do |r|
       (0..COLUMNS - 4).each do |c|
-        diags << (0..3).map { |i| grid[r + i][c + i]}
+        diags << (0..3).map { |i| grid[r - i][c + i]}
       end
     end
     diags
