@@ -65,5 +65,3 @@ Enter column (0-6):
 - Gain experience with RSpec and testing game logic.
 - Follow The Odin Project's approach to incremental, test-driven development.
 
-## 📝 License
-This project is open source under the MIT License.
